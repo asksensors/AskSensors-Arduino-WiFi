@@ -30,7 +30,7 @@ void setup() {
   Serial.println("*****************************************************");
   Serial.println("********** Program Start : Connect Arduino WiFi to AskSensors");
   AT.begin(115200);
-  Serial.println("Initiate AT commands with ESP ");
+  Serial.println("Initiate AT commands with ESP8266 ");
   sendATcmd("AT",5,"OK");
   sendATcmd("AT+CWMODE=1",5,"OK");
   Serial.print("Connecting to WiFi:");
@@ -46,18 +46,18 @@ void loop() {
   url += "?module1=";
   url += random(10, 100);
   Serial.println("*****************************************************");
-  Serial.println("********** Open WiFi connection ");
-  sendATcmd("AT+CIPMUX=1",10,"OK");
-  sendATcmd("AT+CIPSTART=0,\"TCP\",\""+ host +"\","+ port,20,"OK");
-  sendATcmd("AT+CIPSEND=0," + String(url.length()+ 4), 10, ">");
+  Serial.println("********** Open TCP connection ");
+  sendATcmd("AT+CIPMUX=1", 10, "OK");
+  sendATcmd("AT+CIPSTART=0, \"TCP\",\"" + host +"\"," + port, 20, "OK");
+  sendATcmd("AT+CIPSEND=0," + String(url.length() + 4), 10, ">");
   
   Serial.print("********** requesting URL: ");
   Serial.println(url);
   AT.println(url);
   delay(2000);
-  sendATcmd("AT+CIPCLOSE=0",10,"OK");
+  sendATcmd("AT+CIPCLOSE=0", 10, "OK");
   
-  Serial.println("********** WiFi Connection closed ");
+  Serial.println("********** Close TCP Connection ");
   Serial.println("*****************************************************");
   
   delay(20000);   // delay
