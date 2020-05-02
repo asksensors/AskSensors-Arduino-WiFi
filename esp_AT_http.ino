@@ -50,7 +50,7 @@ void loop() {
   Serial.println("*****************************************************");
   Serial.println("********** Open TCP connection ");
   sendATcmd("AT+CIPMUX=1", 10, "OK");
-  sendATcmd("AT+CIPSTART=0, \"TCP\",\"" + host +"\"," + port, 20, "OK");
+  sendATcmd("AT+CIPSTART=0,\"TCP\",\"" + host +"\"," + port, 20, "OK");
   sendATcmd("AT+CIPSEND=0," + String(url.length() + 4), 10, ">");
   
   Serial.print("********** requesting URL: ");
